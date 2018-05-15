@@ -13,9 +13,9 @@ from IPython import embed
 
 lineCount = 80
 columnNames = ['parents', 'has_nurs', 'form', 'children', 'housing', 'finance', 'social', 'health', 'target']
-skipPlots = True
+skipPlots = False
 randSeed = 666 ## TO DO: Change randomly
-testPercent = 0.2
+testPercent = 0.15
 kFoldingValue = 5
 
 print(" ==== Step 1 - Load Dataset ==== ")
@@ -69,12 +69,10 @@ print("-"*lineCount)
 
 print(" ==== Step 6 - Creating Machine Learning Models ==== ")
 models = [
-    ('Decision Tree', DecisionTreeClassifier(criterion='gini')),
     ('Decision Tree', DecisionTreeClassifier(criterion='entropy')),
-    #('Random Forest', RandomForestClassifier(n_estimators=10, criterion='gini', n_jobs=1)),
-    #('K-Nearest Neighbors', KNeighborsClassifier(n_neighbors=5, algorithm='auto', metric='minkowski', n_jobs=1)),
-    #('MLP one-layer', MLPClassifier(hidden_layer_sizes=(16 ), activation='relu', solver='adam', learning_rate_init=0.001, max_iter=100)),
-    #('MLP tri-layer', MLPClassifier(hidden_layer_sizes=(16, 32, 16 ), activation='relu', solver='adam', learning_rate_init=0.001, max_iter=100)),
+    ('Random Forest', RandomForestClassifier(n_estimators=200, criterion='entropy')),
+    ('K-Nearest Neighbors', KNeighborsClassifier(n_neighbors=5, metric='minkowski')),
+    ('MLP tri-layer', MLPClassifier(hidden_layer_sizes=(16, 32, 16 ), activation='relu', solver='adam', learning_rate_init=0.001, max_iter=100)),
 ]
 print("Number of models going to be run:" + str(len(models)))
 print("Models:")
